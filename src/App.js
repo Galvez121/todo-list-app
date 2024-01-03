@@ -36,6 +36,15 @@ export default function App() {
     setTodoItem([]);
   }
 
+  // It will delete only the task that are done
+  function handleDeleteCompleted(id) {
+    // Filter out the items that are not done (selected)
+    const updatedTodoItems = todoItem.filter((item) => !item.done);
+
+    // Update the todoItem state with the filtered items
+    setTodoItem(updatedTodoItems);
+  }
+
   return (
     <main>
       <ToDoForm
@@ -43,7 +52,7 @@ export default function App() {
         onTodoItem={handleTodoItem}
         onHandleToggle={handleToggle}
       />
-      <Button>3 item Selected</Button>
+      <Button onClick={handleDeleteCompleted}>Clear Finished</Button>
       <Button onClick={handleResetButton}>Clear All</Button>
     </main>
   );
@@ -52,23 +61,6 @@ export default function App() {
 function ToDoForm({ todoItem, onTodoItem, onHandleToggle }) {
   // Try data
   // const todoList = InitialToDo;
-
-  // // Todo items list that will be created and handle by the user
-  // const [todoItem, setTodoItem] = useState([]);
-
-  // function handleTodoItem(toDo) {
-  //   setTodoItem((todoItems) => [...todoItems, toDo]);
-  // }
-
-  // const [text, setText] = useState("");
-
-  // function handleToggle(id) {
-  //   setTodoItem((items) =>
-  //     items.map((item) =>
-  //       item.id === id ? { ...item, done: !item.done } : item
-  //     )
-  //   );
-  // }
 
   const [text, setText] = useState("");
 
