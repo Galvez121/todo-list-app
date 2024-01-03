@@ -1,3 +1,4 @@
+import { useState } from "react";
 import "./index.css";
 
 const InitialToDo = [
@@ -25,17 +26,40 @@ export default function App() {
 }
 
 function ToDoForm() {
-  const todoList = InitialToDo;
+  // Try data
+  // const todoList = InitialToDo;
+
+  // Todo items list that will be created and handle by the user
+  const [todoItem, setTodoItem] = useState([]);
+
+  function handleTodoItem(toDo) {
+    setTodoItem((todoItems) => [...todoItems, toDo]);
+  }
+
+  const [text, setText] = useState("");
+
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    // If there is not data just return the function ( That is how you do not create empty items in the from)
+    if (!text) return;
+
+    // New object will be created
+    const newTodoItem = { text, done: false, id: Date.now() };
+
+    handleTodoItem(newTodoItem);
+    setText("");
+  }
 
   return (
     <div>
-      <form>
+      <form onSubmit={handleSubmit}>
         <h1>Daily To Do List</h1>
 
-        <input />
+        <input value={text} onChange={(e) => setText(e.target.value)} />
         <button />
         <ul>
-          {todoList.map((list) => (
+          {todoItem.map((list) => (
             <TodoList text={list.text} />
           ))}
         </ul>
@@ -44,8 +68,15 @@ function ToDoForm() {
   );
 }
 
+// List items
 function TodoList({ text }) {
-  return <li>{text}</li>;
+  return (
+    // I will create the item depending on a list
+    <li>
+      <input type="checkbox" />
+      {text}
+    </li>
+  );
 }
 
 function Button({ children }) {
