@@ -38,6 +38,14 @@ function ToDoForm() {
 
   const [text, setText] = useState("");
 
+  function handleToggle(id) {
+    setTodoItem((items) =>
+      items.map((item) =>
+        item.id === id ? { ...item, done: !item.done } : item
+      )
+    );
+  }
+
   function handleSubmit(e) {
     e.preventDefault();
 
@@ -60,7 +68,11 @@ function ToDoForm() {
         <button />
         <ul>
           {todoItem.map((list) => (
-            <TodoList text={list.text} />
+            <TodoList
+              listItem={list}
+              key={list.id}
+              onToggleItem={handleToggle}
+            />
           ))}
         </ul>
       </form>
@@ -69,12 +81,13 @@ function ToDoForm() {
 }
 
 // List items
-function TodoList({ text }) {
+function TodoList({ listItem, onToggleItem }) {
   return (
     // I will create the item depending on a list
     <li>
-      <input type="checkbox" />
-      {text}
+      <input type="checkbox" onChange={() => onToggleItem(listItem.id)} />
+
+      {listItem.text}
     </li>
   );
 }
