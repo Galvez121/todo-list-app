@@ -1,25 +1,53 @@
-import logo from './logo.svg';
-import './App.css';
+import "./index.css";
 
-function App() {
+const InitialToDo = [
+  {
+    id: 1,
+    text: "Clean",
+    done: true,
+  },
+
+  {
+    id: 2,
+    text: "Work out",
+    done: false,
+  },
+];
+
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <main>
+      <ToDoForm />
+      <Button>3 item Selected</Button>
+      <Button>Clear All</Button>
+    </main>
+  );
+}
+
+function ToDoForm() {
+  const todoList = InitialToDo;
+
+  return (
+    <div>
+      <form>
+        <h1>Daily To Do List</h1>
+
+        <input />
+        <button />
+        <ul>
+          {todoList.map((list) => (
+            <TodoList text={list.text} />
+          ))}
+        </ul>
+      </form>
     </div>
   );
 }
 
-export default App;
+function TodoList({ text }) {
+  return <li>{text}</li>;
+}
+
+function Button({ children }) {
+  return <button>{children}</button>;
+}
