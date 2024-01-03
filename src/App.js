@@ -16,27 +16,12 @@ const InitialToDo = [
 ];
 
 export default function App() {
-  return (
-    <main>
-      <ToDoForm />
-      <Button>3 item Selected</Button>
-      <Button>Clear All</Button>
-    </main>
-  );
-}
-
-function ToDoForm() {
-  // Try data
-  // const todoList = InitialToDo;
-
   // Todo items list that will be created and handle by the user
   const [todoItem, setTodoItem] = useState([]);
 
   function handleTodoItem(toDo) {
     setTodoItem((todoItems) => [...todoItems, toDo]);
   }
-
-  const [text, setText] = useState("");
 
   function handleToggle(id) {
     setTodoItem((items) =>
@@ -45,6 +30,47 @@ function ToDoForm() {
       )
     );
   }
+
+  //Reset Function
+  function handleResetButton() {
+    setTodoItem([]);
+  }
+
+  return (
+    <main>
+      <ToDoForm
+        todoItem={todoItem}
+        onTodoItem={handleTodoItem}
+        onHandleToggle={handleToggle}
+      />
+      <Button>3 item Selected</Button>
+      <Button onClick={handleResetButton}>Clear All</Button>
+    </main>
+  );
+}
+
+function ToDoForm({ todoItem, onTodoItem, onHandleToggle }) {
+  // Try data
+  // const todoList = InitialToDo;
+
+  // // Todo items list that will be created and handle by the user
+  // const [todoItem, setTodoItem] = useState([]);
+
+  // function handleTodoItem(toDo) {
+  //   setTodoItem((todoItems) => [...todoItems, toDo]);
+  // }
+
+  // const [text, setText] = useState("");
+
+  // function handleToggle(id) {
+  //   setTodoItem((items) =>
+  //     items.map((item) =>
+  //       item.id === id ? { ...item, done: !item.done } : item
+  //     )
+  //   );
+  // }
+
+  const [text, setText] = useState("");
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -55,7 +81,7 @@ function ToDoForm() {
     // New object will be created
     const newTodoItem = { text, done: false, id: Date.now() };
 
-    handleTodoItem(newTodoItem);
+    onTodoItem(newTodoItem);
     setText("");
   }
 
@@ -71,7 +97,7 @@ function ToDoForm() {
             <TodoList
               listItem={list}
               key={list.id}
-              onToggleItem={handleToggle}
+              onToggleItem={onHandleToggle}
             />
           ))}
         </ul>
@@ -86,12 +112,13 @@ function TodoList({ listItem, onToggleItem }) {
     // I will create the item depending on a list
     <li>
       <input type="checkbox" onChange={() => onToggleItem(listItem.id)} />
-
-      {listItem.text}
+      <span style={listItem.done ? { textDecoration: "line-through" } : {}}>
+        {listItem.text}
+      </span>
     </li>
   );
 }
 
-function Button({ children }) {
-  return <button>{children}</button>;
+function Button({ onClick, children }) {
+  return <button onClick={onClick}>{children}</button>;
 }
