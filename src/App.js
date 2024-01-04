@@ -52,8 +52,10 @@ export default function App() {
         onTodoItem={handleTodoItem}
         onHandleToggle={handleToggle}
       />
-      <Button onClick={handleDeleteCompleted}>Clear Finished</Button>
-      <Button onClick={handleResetButton}>Clear All</Button>
+      <div className="clearButtons">
+        <Button onClick={handleDeleteCompleted}>Clear Finished</Button>
+        <Button onClick={handleResetButton}>Clear All</Button>
+      </div>
     </main>
   );
 }
@@ -79,11 +81,15 @@ function ToDoForm({ todoItem, onTodoItem, onHandleToggle }) {
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
+      <form name="listItemForm" onSubmit={handleSubmit}>
         <h1>Daily To Do List</h1>
 
-        <input value={text} onChange={(e) => setText(e.target.value)} />
-        <button />
+        <input
+          className="textBar"
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+        />
+        <button>Add</button>
         <ul>
           {todoItem.map((list) => (
             <TodoList
@@ -112,5 +118,9 @@ function TodoList({ listItem, onToggleItem }) {
 }
 
 function Button({ onClick, children }) {
-  return <button onClick={onClick}>{children}</button>;
+  return (
+    <button className="clearAllButton" type="button" onClick={onClick}>
+      {children}
+    </button>
+  );
 }
