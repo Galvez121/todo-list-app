@@ -18,19 +18,65 @@ main {
   border-radius: 1rem;
   width: 50vh;
   /* padding: 0.625rem; */
-  height: 80vh;
+  height: min-content;
   padding-left: 16%;
   padding-right: 16%;
 }
 
+/*Form content*/
+
+h1 {
+  text-align: center;
+  font-style: italic;
+}
+
+.todoForm {
+  width: 60vh;
+
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  text-align: center;
+}
+
 .clearButtons > .clearAllButton {
   margin-bottom: 20%;
+  background-color: unset;
+  border: none;
 }
 
 .clearButtons > .clearAllButton + .clearAllButton {
   margin-left: 7rem; /* Add margin only to the second button */
 }
 
+.inputContainer {
+  position: relative;
+  display: inline-flex;
+  align-items: stretch;
+  width: 50%;
+}
+
 .textBar {
-  width: 70%;
+  height: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px 0 0 4px;
+}
+
+.addButton {
+  display: inline-flex;
+  align-content: center;
+  flex-wrap: wrap;
+
+  font-size: 13px;
+  border: 1px solid #ccc;
+  border-radius: 0 4px 4px 0;
+  padding: 10px;
+  background-color: #49bcff;
+  cursor: pointer;
+  position: relative;
+  right: 53px;
+  height: 25px;
+  text-align: center;
+  margin: 4px;
 }

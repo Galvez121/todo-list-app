@@ -80,16 +80,18 @@ function ToDoForm({ todoItem, onTodoItem, onHandleToggle }) {
   }
 
   return (
-    <div>
+    <div className="todoForm">
       <form name="listItemForm" onSubmit={handleSubmit}>
         <h1>Daily To Do List</h1>
 
-        <input
-          className="textBar"
-          value={text}
-          onChange={(e) => setText(e.target.value)}
-        />
-        <button>Add</button>
+        <div className="inputContainer">
+          <input
+            className="textBar"
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+          />
+          <button className="addButton">Add</button>
+        </div>
         <ul>
           {todoItem.map((list) => (
             <TodoList
