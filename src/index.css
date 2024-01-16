@@ -80,3 +80,46 @@ h1 {
   text-align: center;
   margin: 4px;
 }
+
+/*Media queries*/
+
+@media (max-width: 480px) {
+  main {
+    height: 90vh;
+    margin-top: 3rem;
+    width: auto;
+  }
+
+  /*Form styles*/
+  .todoForm {
+    width: 40vh;
+  }
+
+  .inputContainer {
+    width: 40vh;
+  }
+
+  h1 {
+    margin-bottom: 4rem;
+  }
+
+  .textBar {
+    width: 40vh;
+    height: 25px;
+    margin-left: 2rem;
+  }
+  .addButton {
+    height: inherit;
+  }
+}
+
+@media (max-width: 420px) {
+  .clearButtons {
+    display: inline-flex;
+    flex-direction: column;
+  }
+
+  .clearButtons > .clearAllButton + .clearAllButton {
+    margin-left: 0;
+  }
+}
